@@ -11,6 +11,8 @@ import json
 import requests
 
 import matplotlib.pyplot as plt
+import matplotlib.axes
+
 
 
 if __name__ == '__main__':
@@ -40,10 +42,46 @@ if __name__ == '__main__':
     # del JSON recolectado. Al finalizar el bucle deberá tener la data
     # de los 10 usuarios con cuantos títulos completó cada uno.
 
+response = requests.get(url)
+todos = response.json()
+print("Imprimir los datos de la nube")
+print(json.dumps(todos, indent=4))
+
+
+completed_by_user = {}
+for todo in todos:
+    if todo["completed"]:
+        if todo["userId"] in completed_by_user:
+            completed_by_user[todo["userId"]] += 1
+        else:
+            completed_by_user[todo["userId"]] = 1
+
+# Crear el gráfico de barras
+plt.bar(completed_by_user.keys(), completed_by_user.values())
+plt.xlabel("User ID")
+plt.ylabel("Libro leído")
+plt.title("Libros leídos por UserID")
+plt.show()
+
+# x = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+# y = list(map( +=1 if data["completed"] == True and data["userId"] == x else 0 for x in x))
+
+
+
+
+
+
+
+
     # Debe poder graficar dicha información en un gráfico de barras.
     # En caso de no poder hacer el gráfico comience por usar print
     # para imprimir cuantos títulos completó cada usuario
     # y verifique si los primeros usuarios (mirando la página a ojo)
     # los datos recolectados son correctos.
-
-    print("terminamos")
+'''
+fig = plt.figure()
+ax = fig.add_subplot()
+ax.plot(x, y)
+plt.show()
+'''
+print("terminamos")

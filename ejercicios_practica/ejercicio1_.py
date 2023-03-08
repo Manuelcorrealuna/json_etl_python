@@ -27,11 +27,27 @@ def serializar():
 
     # json_data = {...}
 
+    json_data = {
+        "Nombre": "Manuel", 
+        "Apellido": "Correa", 
+        "DNI": "12345678",
+        "Elementos de Vestir": [
+            {"Prenda": "Zapatillas", "Cantidad": 4}, 
+            {"Prenda": "Remeras", "Cantidad": 8} 
+            ]
+            }
+
+      
     # Una vez que finalice el JSON realice un "dump" para almacenarlo en
     # un archivo que usted defina
+    
+    with open ('my_json.json', 'w') as jsonfile:
+        json.dump(json_data, jsonfile, indent=4)
+
+
 
     # Observe el archivo y verifique que se almaceno lo deseado
-
+    
 
 def deserializar():
     print("Funcion que lee un archivo JSON")
@@ -39,6 +55,9 @@ def deserializar():
     # Basado en la función  anterior debe abrir y leer el contenido
     # del archivo y guardarlo en un objeto JSON utilizando el método
     # load()
+    
+    with open('my_json.json', 'r') as jsonfile:
+        json_data = json.load(jsonfile)
 
     # Luego debe convertir ese JSON data en json_string utilizando
     # el método "dumps" y finalmente imprimir en pantalla el resultado
